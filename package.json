@@ -1,0 +1,26 @@
+{
+  "name": "angular-apodviewer",
+  "version": "1.0.0",
+  "description": "angular spa to query and view NASA APOD data",
+  "main": "index.html",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminboruff/angular-APOD-viewer.git"
+  },
+  "keywords": [
+    "NASA",
+    "APOD"
+  ],
+  "author": "Benjamin H Boruff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benjaminboruff/angular-APOD-viewer/issues"
+  },
+  "homepage": "https://github.com/benjaminboruff/angular-APOD-viewer#readme"
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>APOD Viewer</title>
+	</head>
+	<body ng-app="app">
+		<div ng-controller="ApodviewerCtrl as apod">
+			<h4>{{apod.apodData.title}}</h4>
+			<div ng-show="apod.apodData.error">
+				<h3>An ERROR has occurred retrieving the NASA Astronomy Picture of the Day. {{apod.apodData.message}}</h3>
+			</div>
+			<div class="embed-responsive embed-responsive-16by9" ng-show="apod.video">
+				<iframe class="embed-responsive-item" ng-src="{{apod.apodData.url | trusted}}" allowFullScreen></iframe>
+			</div>
+			<div ng-hide="apod.video">
+				<img class="img-responsive center-block" alt="NASA Picture of the day" ng-src="{{apod.apodData.url}}">
+			</div>
+			<h5>{{apod.apodData.explanation}}</h5>
+			<h6>
+				<em>(Title, image/video, and explanation loaded automatically from NASA's APOD API endpoint. These data change daily.)</em>
+			</h6>
+		</div>
+		<!--<ng-apod-viewer></ng-apod-viewer>-->
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+
+</html>

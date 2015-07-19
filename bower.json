@@ -1,0 +1,21 @@
+{
+  "name": "angular-APOD-viewer",
+  "version": "1.0.0",
+  "homepage": "https://github.com/benjaminboruff/angular-APOD-viewer",
+  "authors": [
+    "Benjamin Boruff <benboruff@gmail.com>"
+  ],
+  "description": "angular spa to query and view NASA APOD data",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3"
+  }
+}
