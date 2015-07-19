@@ -3,9 +3,11 @@
 	'use strict';
 	angular.module('app', [])
 		.service('apodService', ['$http', function ($http) {
-			this.get = function () {
+			this.get = function (apikey) {
+				var apodUrl = "https://api.data.gov/nasa/planetary/apod?api_key=" + apikey + "&format=JSON";
 				console.log('Hello, from apodService!');
-				return $http.get('https://api.data.gov/nasa/planetary/apod?api_key=DEMO_KEY&format=JSON')
+				console.log(apikey);
+				return $http.get(apodUrl)
 					.then(function (res) {
 						return res.data;
 					},
@@ -19,8 +21,9 @@
 		}])
 		.controller('ApodviewerCtrl', ['apodService', function (apodService) {
 			var vm = this;
+			vm.apikey = "DEMO_KEY";
 			vm.getApodData = function () {
-				apodService.get()
+				apodService.get(vm.apikey)
 					.then(function (apodData) {
 						vm.apodData = apodData;
 						vm.video = false;
