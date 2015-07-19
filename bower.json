@@ -17,9 +17,5 @@
   ],
   "dependencies": {
     "angular": "~1.4.3"
-  },
-  "devDependencies": {
-    "gulp": "~3.9.0",
-    "jslint": "~2013.11.23"
   }
 }
