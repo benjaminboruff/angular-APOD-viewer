@@ -4,7 +4,6 @@
 	angular.module('app', [])
 		.service('apodService', ['$http', function ($http) {
 			this.get = function () {
-				var what;
 				console.log('Hello, from apodService!');
 				return $http.get('https://api.data.gov/nasa/planetary/apod?api_key=DEMO_KEY&format=JSON')
 					.then(function (res) {
