@@ -22,5 +22,14 @@
   "bugs": {
     "url": "https://github.com/benjaminboruff/angular-APOD-viewer/issues"
   },
-  "homepage": "https://github.com/benjaminboruff/angular-APOD-viewer#readme"
+  "homepage": "https://github.com/benjaminboruff/angular-APOD-viewer#readme",
+  "devDependencies": {
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0"
+  }
 }
