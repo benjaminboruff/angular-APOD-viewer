@@ -22,15 +22,20 @@
 			<h6>
 				<em>(Title, image/video, and explanation loaded automatically from NASA's APOD API endpoint. These data change daily.)</em>
 			</h6>
-			<label>API_KEY:
-				<input type="text" ng-model="apod.apikey">
-			</label>
-			<p>The DEMO_KEY has limited hourly and daily rates per ip address. You can apply for your own
-				<a href="https://api.nasa.gov/index.html#apply-for-an-api-key">API_KEY</a>for increased limits.</p>
+			<div>
+				<form novalidate class="simple-form">
+					<label>API_KEY:
+						<input type="text" ng-model="apod.apikey">
+					</label>
+					<p>The DEMO_KEY has limited hourly and daily rates per ip address. You can apply for your own
+						<a href="https://api.nasa.gov/index.html#apply-for-an-api-key">API_KEY</a>for increased limits.</p>
+					<input type="submit" ng-click="apod.update(apod.apikey)" value="Change Key">
+				</form>
+			</div>
 		</div>
 		<!--<ng-apod-viewer></ng-apod-viewer>-->
 		<!--<script src="js/app.js"></script>-->
-		<script src="js/app.min.js"></script>
+		<script src="js/app.js"></script>
 	</body>
 
 </html>
