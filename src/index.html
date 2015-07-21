@@ -24,12 +24,21 @@
 			</h6>
 			<div>
 				<form novalidate class="simple-form">
+					<label>Date:
+						<input type="text" ng-model="apod.apodDate">
+					</label>
+					<input type="button" ng-click="apod.updateDate(apod.apodDate)" value="Change Date">
+					<br>
+					<input type="button" ng-click="apod.prevDate(apod.apodDate)" ng-disabled="apod.beforeApodDate(apod.apodDate)" value="Previous">
+					<input type="button" ng-click="apod.nextDate(apod.apodDate)" ng-disabled="apod.futureDate(apod.apodDate)" value="Next">
+					<br>
+					<p>The DEMO_KEY has limited hourly and daily rates per ip address. You can apply for your own
+						<a href="https://api.nasa.gov/index.html#apply-for-an-api-key">API_KEY</a>for increased limits.
+					</p>
 					<label>API_KEY:
 						<input type="text" ng-model="apod.apikey">
 					</label>
-					<p>The DEMO_KEY has limited hourly and daily rates per ip address. You can apply for your own
-						<a href="https://api.nasa.gov/index.html#apply-for-an-api-key">API_KEY</a>for increased limits.</p>
-					<input type="submit" ng-click="apod.update(apod.apikey)" value="Change Key">
+					<input type="button" ng-click="apod.updateKey(apod.apikey)" value="Change Key">
 				</form>
 			</div>
 		</div>
