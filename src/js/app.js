@@ -28367,14 +28367,20 @@ var minlengthDirective = function() {
 	'use strict';
 	angular.module('app', [])
 		.service('apodService', ['$http', function ($http) {
-			this.get = function (apikey, date) {
-				var apodUrl = "https://api.data.gov/nasa/planetary/apod?" + date + "&api_key=" + apikey + "&format=JSON";
+			//apodService.get function takes an API_KEY string
+			//and a date="yyyy-MM-dd" string
+			this.get = function (apikey, dateStr) {
+				var apodUrl = "https://api.data.gov/nasa/planetary/apod?date="
+					+ dateStr
+					+ "&api_key="
+					+ apikey
+					+ "&format=JSON";
 				console.log('Hello, from apodService!!!');
 				console.log(apodUrl);
 				return $http.get(apodUrl, { cache: true })
 					.success(function (data, status, headers, config) {
-						console.log('The headers are: ');
-						console.log(headers());
+						//console.log('The headers are: ');
+						//console.log(headers());
 						return {
 							"data": data,
 							"headers": headers
@@ -28391,9 +28397,16 @@ var minlengthDirective = function() {
 		.controller('ApodviewerCtrl', ['apodService', '$filter', function (apodService, $filter) {
 			var vm = this;
 			vm.apikey = "DEMO_KEY";
-			vm.apodDate = $filter('date')(new Date(), 'yyyy-MM-dd');
-			vm.apodDateStr = "date=" + vm.apodDate;
-			console.log('The date is: ' + vm.apodDate + '\n');
+			//apodDate is a Date() object with initial date as today's date
+			vm.apodDate = new Date();
+			//the URL needs to have the date as a string in yyyy-mm-dd format
+			vm.apodDateStr = vm.apodDate.toISOString().substr(0, 10);
+			// the first APOD image was posted 1996-06-16
+			vm.firstDay = new Date('1996/06/16');
+			vm.todaysDate = new Date(new Date().toISOString().substr(0,10).replace("-", "/"));
+			console.log('The date is: ' + vm.apodDateStr + '\n');
+			
+			//function to retrieve APOD data
 			vm.getApodData = function () {
 				apodService.get(vm.apikey, vm.apodDateStr)
 					.then(function (apodObj) {
@@ -28408,50 +28421,59 @@ var minlengthDirective = function() {
 						//console.log(vm.apodHeaders('X-RateLimit-Remaining'));
 					});
 			};
+			
 			vm.updateKey = function (key) {
 				vm.apikey = key;
 				console.log(vm.apikey);
 				vm.getApodData();
 			};
+			
 			vm.updateDate = function (dateStr) {
-				vm.apodDateStr = "date=" + dateStr;
+				vm.apodDateStr = dateStr;
+				dateStr = dateStr.replace("-", "/");
+				vm.apodDate = new Date(dateStr);
 				console.log(vm.apodDateStr);
 				vm.getApodData();
 			};
-			vm.prevDate = function (dateStr) {
-				var tempAry = dateStr.split('-');
-				var prev = parseInt(tempAry.pop()) - 1;
-				tempAry.push(prev.toString());
-				vm.apodDate = tempAry.join('-');
-				vm.apodDateStr = "date=" + vm.apodDate;
+			
+			vm.prevDay = function () {
+				vm.apodDate.setDate(vm.apodDate.getDate() - 1);
+				vm.apodDateStr = vm.apodDate.toISOString().substr(0, 10);
 				console.log(vm.apodDateStr);
 				vm.getApodData();
 			};
-			vm.nextDate = function (dateStr) {
-				var tempAry = dateStr.split('-');
-				var next = parseInt(tempAry.pop()) + 1;
-				tempAry.push(next.toString());
-				vm.apodDate = tempAry.join('-');
-				vm.apodDateStr = "date=" + vm.apodDate;
+			
+			vm.nextDay = function () {
+				vm.apodDate.setDate(vm.apodDate.getDate() + 1);
+				vm.apodDateStr = vm.apodDate.toISOString().substr(0, 10);
 				console.log(vm.apodDateStr);
 				vm.getApodData();
 			};
-			vm.futureDate = function (dateStr) {
-				var todaysDate = $filter('date')(new Date(), 'yyyy-MM-dd');
-				var d1 = Date.parse(dateStr);
-				var d2 = Date.parse(todaysDate);
-				if (d1 >= d2) {
-					return true;
-				}
-			};
+
 			vm.beforeApodDate = function (dateStr) {
-				// the first APOD image was posted 1996-06-16
-				var d1 = Date.parse(dateStr);
-				var d2 = Date.parse('1996-06-16');
-				if (d1 <= d2) {
+				dateStr = dateStr.replace("-", "/");
+				var prevDay = new Date(dateStr);	
+				if (prevDay <= vm.firstDay) {
 					return true;
 				}
 			};
+
+			vm.afterApodDate = function (dateStr) {
+				dateStr = dateStr.replace("-", "/");
+				var nextDay = new Date(dateStr);
+				if (nextDay >= vm.todaysDate) {
+					return true;
+				}
+			};
+			
+			vm.outsideApodDates = function (dateStr){
+				dateStr = dateStr.replace('-', '/');
+				var enteredDay = new Date(dateStr);
+				if (enteredDay < vm.firstDay || enteredDay > vm.todaysDate) {
+					return true;
+				}
+			};
+			//initial getting of APOD data
 			vm.getApodData();
 		}])
 		.filter('trusted', ['$sce', function ($sce) {

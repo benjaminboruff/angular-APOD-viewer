@@ -25,12 +25,12 @@
 			<div>
 				<form novalidate class="simple-form">
 					<label>Date:
-						<input type="text" ng-model="apod.apodDate">
+						<input type="text" ng-model="apod.apodDateStr">
 					</label>
-					<input type="button" ng-click="apod.updateDate(apod.apodDate)" value="Change Date">
+					<input type="button" ng-click="apod.updateDate(apod.apodDateStr)" ng-disabled="apod.outsideApodDates(apod.apodDateStr)" value="Change Day">
 					<br>
-					<input type="button" ng-click="apod.prevDate(apod.apodDate)" ng-disabled="apod.beforeApodDate(apod.apodDate)" value="Previous">
-					<input type="button" ng-click="apod.nextDate(apod.apodDate)" ng-disabled="apod.futureDate(apod.apodDate)" value="Next">
+					<input type="button" ng-click="apod.prevDay()" ng-disabled="apod.beforeApodDate(apod.apodDateStr)" value="Previous">
+					<input type="button" ng-click="apod.nextDay()" ng-disabled="apod.afterApodDate(apod.apodDateStr)" value="Next">
 					<br>
 					<p>The DEMO_KEY has limited hourly and daily rates per ip address. You can apply for your own
 						<a href="https://api.nasa.gov/index.html#apply-for-an-api-key">API_KEY</a>for increased limits.
