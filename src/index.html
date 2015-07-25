@@ -7,44 +7,49 @@
 		<title>APOD Viewer</title>
 	</head>
 	<body ng-app="app">
-		<div ng-controller="ApodviewerCtrl as apod">
-			<h4>{{apod.apodData.title}}</h4>
-			<div ng-show="apod.apodData.error">
-				<h3>An ERROR has occurred retrieving the NASA Astronomy Picture of the Day. {{apod.apodData.message}}</h3>
+		<div ng-controller="ApodViewerCtrl as ctrl">
+			<h4>{{ctrl.apodData.title}}</h4>
+			<div ng-show="ctrl.apodData.error">
+				<h3>An ERROR has occurred retrieving the NASA Astronomy Picture of the Day. {{ctrl.apodData.message}}</h3>
 			</div>
-			<div class="embed-responsive embed-responsive-16by9" ng-show="apod.video">
-				<iframe class="embed-responsive-item" ng-src="{{apod.apodData.url | trusted}}" allowFullScreen></iframe>
+			<div class="embed-responsive embed-responsive-16by9" ng-show="ctrl.video">
+				<iframe class="embed-responsive-item" ng-src="{{ctrl.apodData.url | trusted}}" allowFullScreen></iframe>
 			</div>
-			<div ng-hide="apod.video">
-				<img class="img-responsive center-block" alt="NASA Picture of the day" ng-src="{{apod.apodData.url}}">
+			<div ng-hide="ctrl.video">
+				<img class="img-responsive center-block" alt="NASA Picture of the day" ng-src="{{ctrl.apodData.url}}">
 			</div>
-			<h5>{{apod.apodData.explanation}}</h5>
+			<h5>{{ctrl.apodData.explanation}}</h5>
 			<h6>
 				<em>(Title, image/video, and explanation loaded automatically from NASA's APOD API endpoint. These data change daily.)</em>
 			</h6>
-			<div>
-				<form novalidate class="simple-form">
-					<label>Date:
-						<input type="text" ng-model="apod.apodDateStr">
-					</label>
-					<input type="button" ng-click="apod.updateDate(apod.apodDateStr)" ng-disabled="apod.outsideApodDates(apod.apodDateStr)" value="Change Day">
+							APDO:	{{ctrl.apodDate}}<br>
+							Chosen:	{{ctrl.chosenDate.date}}
+				<form>
+
+					Date:
+					<input type="date"  ng-model="ctrl.apodDate"  min={{ctrl.firstDayStr}} max={{ctrl.todaysDateStr}} required>
+					<input type="button" ng-model="ctrl.apodDate" ng-click="ctrl.changeDate()" ng-disabled="ctrl.outsideApodDates()" value="Change Day">
 					<br>
-					<input type="button" ng-click="apod.prevDay()" ng-disabled="apod.beforeApodDate(apod.apodDateStr)" value="Previous">
-					<input type="button" ng-click="apod.nextDay()" ng-disabled="apod.afterApodDate(apod.apodDateStr)" value="Next">
+					<input type="button" ng-click="ctrl.prevDay()" ng-disabled="ctrl.beforeApodDate()" value="Previous">
+					<input type="button" ng-click="ctrl.nextDay()" ng-disabled="ctrl.afterApodDate()" value="Next">
 					<br>
 					<p>The DEMO_KEY has limited hourly and daily rates per ip address. You can apply for your own
-						<a href="https://api.nasa.gov/index.html#apply-for-an-api-key">API_KEY</a>for increased limits.
-					</p>
+						<a href="https://api.nasa.gov/index.html#apply-for-an-api-key">api key</a>for increased limits.</p>
 					<label>API_KEY:
-						<input type="text" ng-model="apod.apikey">
+						<input type="text" ng-model="ctrl.apikey">
 					</label>
-					<input type="button" ng-click="apod.updateKey(apod.apikey)" value="Change Key">
+					<input type="button" ng-click="ctrl.updateKey(ctrl.apikey)" value="Change Key">
 				</form>
-			</div>
+			
 		</div>
 		<!--<ng-apod-viewer></ng-apod-viewer>-->
-		<!--<script src="js/app.js"></script>-->
-		<script src="js/app.min.js"></script>
+		<script src="js/angular.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/apodviewerctrl.js"></script>
+		<script src="js/services.js"></script>
+		<script src="js/apodservice.js"></script>
+		<!--<script src="js/app.min.js"></script>-->
 	</body>
 
 </html>

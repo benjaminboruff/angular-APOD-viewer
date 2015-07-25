@@ -9,7 +9,12 @@ var  gulp = require('gulp'),
       del = require('del');
 
 gulp.task('lint', function () {
-        return gulp.src('src/js/main.js')
+        return gulp.src([
+                'src/js/main.js', 
+                'src/js/controllers.js', 
+                'src/js/apodviewerctrl.js', 
+                'src/js/services.js', 
+                'src/js/apodservice.js'])
                 .pipe(lint())
                 .pipe(lint.reporter('default'));
 });
@@ -17,7 +22,11 @@ gulp.task('lint', function () {
 gulp.task('concatScripts', function () {
         return gulp.src([
                 'src/bower_components/angular/angular.js',
-                'src/js/main.js'])
+                'src/js/main.js',
+                'src/js/controllers.js',
+                'src/js/apodviewerctrl.js',
+                'src/js/services.js',
+                'src/js/apodservice.js'])
                 .pipe(maps.init())
                 .pipe(concat('app.js'))
                 .pipe(maps.write('./'))
@@ -42,8 +51,13 @@ gulp.task('build', ['minifyScripts'], function () {
 });
 
 gulp.task('watch', function () {
+        gulp.src('src/bower_components/angular/angular.js')
+                .pipe(gulp.dest('src/js'));
         gulp.watch('src/js/main.js', ['lint']);
-        gulp.watch('src/js/main.js', ['concatScripts']);
+        gulp.watch('src/controllers.js', ['lint']);
+        gulp.watch('src/services.js', ['lint']);
+        gulp.watch('src/apodviewerctrl.js', ['lint']);
+        gulp.watch('src/apodservice.js', ['lint']);
 });
 
 gulp.task('default', function () {
