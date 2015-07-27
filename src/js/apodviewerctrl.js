@@ -19,7 +19,6 @@
 		vm.urlDateStr = urlDateStr;
 		vm.objDateStr = objDateStr;
 		
-		//vm.apikey = "ep9KoIgbcqVVVQ7JiLz5vcYql67pTJRPBTeeoIal";
 		vm.apikey = "DEMO_KEY";
 		// the first APOD image was posted 1996-06-16
 		vm.firstDay = new Date('1996/06/16');
@@ -37,14 +36,11 @@
 		//todaysDateStr is used to set the max date in the input date picker
 		//in index.html
 		vm.todaysDateStr = urlDateStr(vm.todaysDate);
-		vm.chosenDate = { date: new Date(urlDateStr(vm.todaysDate)),
-						  dateStr:  urlDateStr(vm.todaysDate)};
-		//console.log("The chosen date is: " + vm.chosenDate.date);
-		//console.log("The chosen dateStr is: " + vm.chosenDate.dateStr);
+;
 		//apodDate is a Date() object with initial date as today's date
 		//and changes depending on the date chosen via the date input
 		vm.apodDate = new Date(objDateStr(vm.todaysDate));
-		//console.log("The apodDate is: " + vm.apodDate);
+		console.log("The apodDate is: " + vm.apodDate);
 
 		//initial getting of APOD data
 		vm.getApodData();
@@ -69,24 +65,24 @@
 		}
 
 		function changeDate() {
-			console.log("The chosen date is: " + vm.apodDate);
 			vm.getApodData();
 		}
 
 		function prevDay() {
-			vm.apodDate.setDate(vm.apodDate.getDate() - 1);
-			//console.log("PREV: " + vm.apodDate);
+			//a new date object is required to trigger an update
+			//in the view to that the input type="date" is updated
+			vm.apodDate = new Date(vm.apodDate.setDate(vm.apodDate.getDate() - 1));
 			vm.getApodData();
 		}
 
 		function nextDay() {
-			vm.apodDate.setDate(vm.apodDate.getDate() + 1);
-			//console.log("NEXT: " + vm.apodDate);
+			//a new date object is required to trigger an update
+			//in the view to that the input type="date" is updated
+			vm.apodDate = new Date(vm.apodDate.setDate(vm.apodDate.getDate() + 1));
 			vm.getApodData();
 		}
 
 		function beforeApodDate() {
-			//console.log("IN beforeApodDate the apodDate is: " + vm.apodDate);
 			if (vm.apodDate <= vm.firstDay ||
 				typeof vm.apodDate === 'undefined') {
 				return true;
@@ -94,7 +90,6 @@
 		}
 
 		function afterApodDate() {
-			//console.log("IN afterApodDate the apodDate is: " + vm.apodDate);
 			if (vm.apodDate >= vm.todaysDate ||
 				typeof vm.apodDate === 'undefined') {
 				return true;
