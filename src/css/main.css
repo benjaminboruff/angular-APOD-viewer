@@ -1,3 +1,27 @@
-body {
-	background-color: beige;
+
+.jumbotron {
+	max-width: 900px;
+	margin-top: 50px;
+	border-radius: 5px;
 }
+
+.controls {
+	max-width: 900px;
+}
+
+a {
+	color: #FF5252;
+}
+
+.apikey {
+	margin-bottom: 30px;
+}
+
+.dark-primary-color    { background: #1976D2; }
+.default-primary-color { background: #2196F3; }
+.light-primary-color   { background: #BBDEFB; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #FF5252; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #727272; }
+.divider-color         { border-color: #B6B6B6; }
