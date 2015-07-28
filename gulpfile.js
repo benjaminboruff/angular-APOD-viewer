@@ -49,6 +49,7 @@ gulp.task('minifyScripts', ['concatScripts'], function () {
 
 gulp.task('build', ['minifyScripts'], function () {
         return gulp.src(['src/js/app.min.js',
+                'src/css/main.css',
                 'src/index.html'], { base: './src/' })
                 .pipe(gulp.dest('dist'));
 });

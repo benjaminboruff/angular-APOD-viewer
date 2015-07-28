@@ -28408,11 +28408,11 @@ angular.module('controllers', []);
 		vm.todaysDate = new Date(objDateStr(new Date()));
 		//todaysDateStr is used to set the max date in the input date picker
 		//in index.html
-		vm.todaysDateStr = urlDateStr(vm.todaysDate);
+		vm.todaysDateStr = vm.urlDateStr(vm.todaysDate);
 ;
 		//apodDate is a Date() object with initial date as today's date
 		//and changes depending on the date chosen via the date input
-		vm.apodDate = new Date(objDateStr(vm.todaysDate));
+		vm.apodDate = new Date(vm.objDateStr(vm.todaysDate));
 		console.log("The apodDate is: " + vm.apodDate);
 
 		//initial getting of APOD data
@@ -28420,7 +28420,7 @@ angular.module('controllers', []);
 		//function to retrieve APOD data
 		function getApodData() {
 			//the URL needs to have the date as a string in yyyy-mm-dd format
-			vm.apodDateStr = urlDateStr(vm.apodDate);
+			vm.apodDateStr = vm.urlDateStr(vm.apodDate);
 			apodService.get(vm.apikey, vm.apodDateStr)
 				.then(function (apodObj) {
 					vm.apodData = apodObj.data;
@@ -28479,8 +28479,8 @@ angular.module('controllers', []);
 
 		function urlDateStr(dateObjUTC) {
 			var locDateAry = dateObjUTC
-								.toLocaleDateString('en-US', vm.dateOptions)
-								.split('/');
+							.toLocaleDateString('en-US', vm.dateOptions)
+							.split('/');
 			var year = locDateAry.pop();
 			locDateAry.unshift(year);
 			return locDateAry.join('-');
@@ -28488,8 +28488,8 @@ angular.module('controllers', []);
 
 		function objDateStr(dateObjUTC) {
 			var locDateAry = dateObjUTC
-								.toLocaleDateString('en-US', vm.dateOptions)
-								.split('/');
+							.toLocaleDateString('en-US', vm.dateOptions)
+							.split('/');
 			var year = locDateAry.pop();
 			locDateAry.unshift(year);
 			return locDateAry.join('/');

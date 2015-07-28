@@ -5,6 +5,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>APOD Viewer</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="css/main.css">
 	</head>
 	<body ng-app="app">
 		<div ng-controller="ApodViewerCtrl as vm">
@@ -26,20 +29,22 @@
 
 					Date:
 					<input type="date"  ng-model="vm.apodDate" min={{vm.firstDayStr}} max={{vm.todaysDateStr}} required>
-					<input type="button" ng-model="vm.apodDate" ng-click="vm.changeDate()" ng-disabled="vm.outsideApodDates()" value="Change Day">
+					<input type="button" class="btn" ng-model="vm.apodDate" ng-click="vm.changeDate()" ng-disabled="vm.outsideApodDates()" value="Change Day">
 					<br>
-					<input type="button" ng-click="vm.prevDay()" ng-disabled="vm.beforeApodDate()" value="Previous">
-					<input type="button" ng-click="vm.nextDay()" ng-disabled="vm.afterApodDate()" value="Next">
+					<input type="button" class="btn" ng-click="vm.prevDay()" ng-disabled="vm.beforeApodDate()" value="Previous">
+					<input type="button" class="btn" ng-click="vm.nextDay()" ng-disabled="vm.afterApodDate()" value="Next">
 					<br>
 					<p>The DEMO_KEY has limited hourly and daily rates per ip address. You can apply for your own
 						<a href="https://api.nasa.gov/index.html#apply-for-an-api-key">api key</a> for increased limits.</p>
 					<label>API_KEY:
 						<input type="text" ng-model="vm.apikey">
 					</label>
-					<input type="button" ng-click="vm.updateKey(vm.apikey)" value="Change Key">
+					<input type="button" class="btn" ng-click="vm.updateKey(vm.apikey)" value="Change Key">
 				</form>
 			
 		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<!--<ng-apod-viewer></ng-apod-viewer>-->
 		<!--<script src="js/angular.js"></script>
 		<script src="js/main.js"></script>
@@ -50,6 +55,7 @@
 		<script src="js/filters.js"></script>
 		<script src="js/trustedfilter.js"></script>-->
 		<script src="js/app.min.js"></script>
+
 	</body>
 
 </html>
