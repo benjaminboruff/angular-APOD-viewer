@@ -26,7 +26,10 @@ gulp.task('concatScripts', function () {
                 'src/js/controllers.js',
                 'src/js/apodviewerctrl.js',
                 'src/js/services.js',
-                'src/js/apodservice.js'])
+                'src/js/apodservice.js',
+                'src/js/filters.js',
+                'src/js/trustedfilter.js'
+                ])
                 .pipe(maps.init())
                 .pipe(concat('app.js'))
                 .pipe(maps.write('./'))

@@ -22,6 +22,8 @@ module.exports = function(config) {
       'src/js/apodviewerctrl.js',
       'src/js/services.js',
       'src/js/apodservice.js',
+      'src/js/filters.js',
+      'src/js/trustedfilter.js',
       'src/js/*.Spec.js'
     ],
 
